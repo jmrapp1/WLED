@@ -1,5 +1,14 @@
 export interface Effect {
+    id: number;
+    name: string;
 
+    // effect flags
+    paletteEffect: boolean;
+    zerodEffect: boolean;
+    onedEffect: boolean;
+    twodEffect: boolean;
+    volumeEffect: boolean
+    frequencyEffect: boolean
 }
 
 export interface Color {
@@ -10,20 +19,13 @@ export interface Color {
 }
 
 export interface ColorPalette {
-    id: string;
+    id: number;
     name: string;
     colors: Color[];
 
 }
 
-export interface ColorSolid extends Color {
-
-}
-
-export interface Light {
-    on: boolean;
-    brightness: number;
-    temperature: number;
-    effect: Effect;
-    color: Color;
+export interface WebsocketConnection {
+    useWs: boolean;
+    ws: WebSocket;
 }

@@ -12,12 +12,16 @@ function App() {
             if (store.colorPalettes.length === 0) {
                 store.fetchColorPalettes();
             }
+            if (store.effects.length === 0) {
+                store.fetchEffects();
+            }
+            store.fetchLightState();
         });
     }, []);
 
     return (
         <div className="prose lg:prose-xl prose-slate dark:prose-invert dark:bg-cgray-500 min-h-screen">
-            <div className="px-5 py-10">
+            <div className="px-5 pt-10 pb-40">
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Home/>}/>

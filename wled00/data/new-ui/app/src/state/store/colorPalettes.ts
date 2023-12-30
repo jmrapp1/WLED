@@ -2,6 +2,7 @@ import {StateCreator} from "zustand";
 import {AppState, ColorPalettesStore} from "../types";
 import {PalxResponse} from "../../types/api";
 import {Color, ColorPalette} from "../../types/types";
+import {sendCommand} from "../comms";
 
 async function fetchAllPalxPages(lightIp: string) {
     let palx = {};
@@ -74,17 +75,25 @@ async function fetchColorPalettes(lightIp: string) {
 
         // Create color palette
         colorPalettes.push({
-            id: `${i}`,
+            id: i,
             name: palettes[i],
             colors: colors
         })
     }
-    console.log(colorPalettes);
     return colorPalettes;
+}
+
+async function setPalette(palette: ColorPalette, state: AppState) {
+    return sendCommand({
+        seg: {
+            pal: palette.id
+        }
+    }, state);
 }
 
 export const createColorPalettesStore: StateCreator<AppState, [], [], ColorPalettesStore> =
     (set, get) => ({
         colorPalettes: [],
         fetchColorPalettes: async () => set({colorPalettes: await fetchColorPalettes(get().lightIp)}),
+        setPalette: (palette: ColorPalette) => setPalette(palette, get())
     });
