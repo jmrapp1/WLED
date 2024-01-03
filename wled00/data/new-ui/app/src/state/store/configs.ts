@@ -2,7 +2,7 @@ import {StateCreator} from "zustand";
 import {AppState, ConfigsStore} from "../types";
 
 async function fetchLightIp() {
-    return "http://wled1.local";
+    return "http://wled2.local";
 }
 
 export const createConfigsStore: StateCreator<AppState, [], [], ConfigsStore> =

@@ -1,66 +1,70 @@
-import {BookmarkSquareIcon, Cog8ToothIcon, LightBulbIcon, SparklesIcon} from "@heroicons/react/24/outline";
+import {
+    BookmarkSquareIcon,
+    Cog8ToothIcon,
+    LightBulbIcon,
+    SparklesIcon,
+    Square3Stack3DIcon
+} from "@heroicons/react/24/outline";
 import {Slider} from "@nextui-org/react";
 import {useBoundStore} from "../state/state";
 import {useEffect, useRef, useState} from "react";
+import {NavLink, useLocation} from "react-router-dom";
 
-const iconClasses = "w-5 h-5 mb-2 text-gray-500 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+const iconClasses = isActive => "w-5 h-5 mb-1 m-auto " + (isActive ? "dark:text-gray-100" : "text-gray-500 dark:text-gray-400");
 
 const options = [
     {
-        icon: <LightBulbIcon className={iconClasses}/>,
-        text: "Home"
+        icon: isActive => <LightBulbIcon className={iconClasses(isActive)}/>,
+        text: "Home",
+        link: "/"
     },
     {
-        icon: <SparklesIcon className={iconClasses}/>,
-        text: "Effects"
+        icon: isActive => <BookmarkSquareIcon className={iconClasses(isActive)}/>,
+        text: "Presets",
+        link: "/presets"
     },
     {
-        icon: <BookmarkSquareIcon className={iconClasses}/>,
-        text: "Presets"
+        icon: isActive => <Square3Stack3DIcon className={iconClasses(isActive)}/>,
+        text: "Segments",
+        link: "/segments"
     },
     {
-        icon: <Cog8ToothIcon className={iconClasses}/>,
-        text: "Settings"
+        icon: isActive => <Cog8ToothIcon className={iconClasses(isActive)}/>,
+        text: "Settings",
+        link: "/settings"
     },
 ]
 
 export default function (props: any) {
 
     const setBrightness = useBoundStore().setBrightness;
-    const [brightness, setBrightnessState] = useState(useBoundStore().lightState.bri);
+    const [brightness, setBrightnessState] = useState(useBoundStore().lightState?.bri || 128);
+
+    const location = useLocation();
+    const route = location.pathname;
+    const isActive = path => route === path;
 
     useEffect(() => {
         useBoundStore.subscribe(state => {
-            setBrightnessState(state.lightState.bri)
+            setBrightnessState(state.lightState?.bri || 128)
         });
     }, []);
 
     return <div
-        className="fixed bottom-0 left-0 z-50 w-full h-30 bg-white bg-slate-50 border-t-2 border-slate-200 dark:bg-cgray-700 dark:border-cgray-600">
-        <div className="grid h-full h-5 font-medium px-6 mt-4 mb-5">
-            <Slider
-                size="lg"
-                step={1}
-                maxValue={255}
-                minValue={0}
-                color="success"
-                showOutline={true}
-                aria-label="Brightness"
-                defaultValue={128}
-                value={brightness}
-                onChange={bri => setBrightnessState(bri as any)}
-                onChangeEnd={() => setBrightness(brightness)}
-                className="max-w-md"
-            />
-        </div>
-        <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium mb-4">
+        className="fixed bottom-0 left-0 z-50 w-full h-[80px] bg-white bg-slate-50 dark:bg-cgray-700 dark:border-cgray-600">
+        <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
             {options.map(opt =>
-                <button type="button" key={opt.text}
-                        className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                    {opt.icon}
-                    <span
-                        className="text-sm text-gray-500 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-500">{opt.text.toUpperCase()}</span>
-                </button>
+                <div className={'inline-flex flex-col items-center pb-4 pt-4 ' + (isActive(opt.link) ? "bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-sky-400 to-blue-800" : "")}>
+                    <NavLink
+                        to={opt.link}
+                        key={opt.text}
+                        className={"group no-underline"}>
+                        {opt.icon(isActive(opt.link))}
+                        <span className={"text-sm " + (isActive(opt.link) ? "dark:text-gray-100" : "text-gray-500 dark:text-gray-400")}>
+                            {opt.text.toUpperCase()}
+                        </span>
+                    </NavLink>
+                </div>
             )}
         </div>
     </div>

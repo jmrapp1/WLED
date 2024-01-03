@@ -1,6 +1,6 @@
 import {AppState} from "./types";
 
-export async function sendCommand(cmd: any, state: AppState) {
+export async function sendCommand(cmd: any, state: AppState, updateState = true) {
     let useWs = state.wsConnection.useWs && state.wsConnection.ws.readyState === WebSocket.OPEN;
     const reqType = cmd ? 'POST' : 'GET';
 
@@ -41,7 +41,7 @@ export async function sendCommand(cmd: any, state: AppState) {
         }
 
         // If post then wled will send light state back. Hook this and update state
-        if (reqType === 'POST') {
+        if (reqType === 'POST' && updateState) {
             state.setLightState(json);
         }
         return json;

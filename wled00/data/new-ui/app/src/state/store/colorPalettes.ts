@@ -21,7 +21,7 @@ async function fetchAllPalxPages(lightIp: string) {
 async function fetchColorPalettes(lightIp: string) {
     // get all palettes
     const palettesRes = await fetch(lightIp + "/json/palettes");
-    const palettes: string[] = await palettesRes.json();
+    const palettes: string[] = (await palettesRes.json()) || [];
 
     // get all palette colors
     const palx = await fetchAllPalxPages(lightIp);
@@ -35,6 +35,10 @@ async function fetchColorPalettes(lightIp: string) {
         // go through color data for palette and form all colors
         const colors: Color[] = [];
         const colorData = palx[`${i}`];
+        if (!colorData) {
+            console.warn(`No color data found for palette ${palettes[i]} {${i}}`);
+            continue;
+        }
         for (let j = 0; j < colorData.length; j++) {
 
             // figure out what kind of data the palette is

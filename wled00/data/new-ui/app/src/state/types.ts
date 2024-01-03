@@ -1,4 +1,5 @@
 import {Color, ColorPalette, Effect, WebsocketConnection} from "../types/types";
+import {LightInfo, LightState} from "../types/light";
 
 export interface ColorPalettesStore {
     colorPalettes: ColorPalette[],
@@ -24,19 +25,15 @@ export interface EffectsStore {
 }
 
 export interface LightsStore {
-    lightInfo: {
-        arch: string;
-    };
-    lightState: {
-        on: boolean;
-        bri: number;
-    };
+    lightInfo?: LightInfo;
+    lightState?: LightState;
     wsConnection: WebsocketConnection;
 
     // actions
     fetchLightState: () => Promise<void>;
     setLightState: (state) => void;
-    setBrightness: (brightness) => Promise<void>;
+    setBrightness: (brightness: number, updateState?: boolean) => Promise<void>;
+    setOn: (enabled: boolean) => Promise<void>;
 }
 
 export type AppState = ColorPalettesStore & ConfigsStore & EffectsStore & LightsStore;

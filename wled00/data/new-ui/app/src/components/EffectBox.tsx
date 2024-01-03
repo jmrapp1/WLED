@@ -4,6 +4,7 @@ import {useBoundStore} from "../state/state";
 
 export interface EffectBoxProps {
     effect: Effect;
+    className?: string;
 }
 
 const flagStyle: CSSProperties = {fontSize: '24px', filter: 'grayscale(100%)'};
@@ -13,7 +14,7 @@ export default function (props: EffectBoxProps) {
     const setEffect = useBoundStore((state) => state.setEffect);
 
     return <div
-        className={`px-2 py-4 min-w-40 rounded-md dark:bg-cgray-700 grid grid-cols-1 content-center justify-items-center shadow-lg`}
+        className={`px-2 py-4 min-w-40 rounded-md dark:bg-cgray-300 grid grid-cols-1 content-center justify-items-center shadow-md shadow-cgray-700 ` + (props.className ?? "")}
         onClick={() => setEffect(props.effect)}
     >
         <div className={`flex gap-2`}>

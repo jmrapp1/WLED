@@ -4,6 +4,8 @@ import BottomMenuBar from "./layout/BottomMenuBar";
 import Home from "./routes/Home";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {useBoundStore} from "./state/state";
+import Effects from "./routes/Effects";
+import TopMenuBar from "./layout/TopMenuBar";
 
 function App() {
     const store = useBoundStore();
@@ -20,15 +22,17 @@ function App() {
     }, []);
 
     return (
-        <div className="prose lg:prose-xl prose-slate dark:prose-invert dark:bg-cgray-500 min-h-screen">
-            <div className="px-5 pt-10 pb-40">
-                <BrowserRouter>
+        <div className="prose lg:prose-lg prose-slate dark:prose-invert dark:bg-cgray-500 min-h-screen pt-[130px]">
+            <BrowserRouter>
+                <TopMenuBar />
+                <div className="pb-24">
                     <Routes>
                         <Route path="/" element={<Home/>}/>
+                        <Route path="/effects" element={<Effects/>}/>
                     </Routes>
-                </BrowserRouter>
-            </div>
-            <BottomMenuBar/>
+                </div>
+                <BottomMenuBar/>
+            </BrowserRouter>
         </div>
     );
 }
