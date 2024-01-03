@@ -4,6 +4,7 @@ import {useBoundStore} from "../state/state";
 
 export interface EffectBoxProps {
     effect: Effect;
+    activeEffect: boolean;
     className?: string;
 }
 

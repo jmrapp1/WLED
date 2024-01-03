@@ -41,7 +41,11 @@ export default function (props: any) {
                     rows={3}
                     items={store.effects}
                     render={(effect, i, len) =>
-                        <EffectBox effect={effect} className={i === 0 ? `ml-${globalX}` : ''}/>
+                        <EffectBox
+                            effect={effect}
+                            activeEffect={selectedEffects.indexOf(effect.id) >= 0}
+                            className={i === 0 ? `ml-${globalX}` : ''}
+                        />
                     }
                 />
             </div>

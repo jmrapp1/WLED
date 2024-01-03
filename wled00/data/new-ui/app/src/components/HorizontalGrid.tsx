@@ -15,7 +15,7 @@ export default function <T>(props: HorizontalGridProps<T>) {
         rows.push([...itemsCopy.splice(0, perRow)]);
     }
 
-    return <div className={`flex overflow-x-scroll py-4`}>
+    return <div className={`flex overflow-x-scroll py-5`}>
         <div className={`grid gap-y-4 grid-cols-1`}>
         {
             rows.map(row => {

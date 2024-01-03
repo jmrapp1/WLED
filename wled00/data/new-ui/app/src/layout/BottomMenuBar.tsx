@@ -37,21 +37,12 @@ const options = [
 
 export default function (props: any) {
 
-    const setBrightness = useBoundStore().setBrightness;
-    const [brightness, setBrightnessState] = useState(useBoundStore().lightState?.bri || 128);
-
     const location = useLocation();
     const route = location.pathname;
     const isActive = path => route === path;
 
-    useEffect(() => {
-        useBoundStore.subscribe(state => {
-            setBrightnessState(state.lightState?.bri || 128)
-        });
-    }, []);
-
     return <div
-        className="fixed bottom-0 left-0 z-50 w-full h-[80px] bg-white bg-slate-50 dark:bg-cgray-700 dark:border-cgray-600">
+        className="fixed bottom-0 left-0 z-50 w-full h-[80px] bg-white bg-slate-50 rounded-t-md dark:bg-cgray-700 dark:border-cgray-600">
         <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
             {options.map(opt =>
                 <div className={'inline-flex flex-col items-center pb-4 pt-4 ' + (isActive(opt.link) ? "bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-sky-400 to-blue-800" : "")}>
