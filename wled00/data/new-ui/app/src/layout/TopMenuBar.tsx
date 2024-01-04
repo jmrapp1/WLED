@@ -47,10 +47,10 @@ export default function (props: any) {
             setUpdateBrightness(false);
         }
     }
-
+ //background: linear-gradient(to right,#cb3e0d,#d02773);
     return <div
         className={`fixed top-0 left-0 z-50 w-full py-4 rounded-b-md drop-shadow-md shadow-cgray-700 ${globalPaddingXCss} 
-            bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-sky-400 to-blue-800`}>
+            bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-[#cb3e0d] to-[#d02773]`}>
         <div className={"flex justify-between items-center"}>
             <h2 className={`!m-0 flex font-semibold text-white -mt-1`}>
                 <img className={'h-8 md:h-10 !m-0 !mr-1'} src={"/icon1.png"} />
