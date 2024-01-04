@@ -16,7 +16,7 @@ export default function (props: EffectBoxProps) {
     const setEffect = useBoundStore((state) => state.setEffect);
 
     return <div
-        className={`relative px-2 py-4 min-w-40 rounded-md dark:bg-cgray-300 grid grid-cols-1 content-center justify-items-center shadow-md shadow-cgray-700 ` + (props.className ?? "")}
+        className={`relative px-2 py-4 min-w-40 rounded-md dark:bg-cgray-500 grid grid-cols-1 content-center justify-items-center shadow-md dark:shadow-cgray-700 ` + (props.className ?? "")}
         onClick={() => setEffect(props.effect)}
     >
         {

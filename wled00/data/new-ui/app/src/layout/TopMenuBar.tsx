@@ -34,7 +34,7 @@ export default function (props: any) {
             // set brightness then wait before setting updateBrightness to true
             // dont update state so that UI is smooth when dragging; it will update when dragging released
             setBrightness(brightness, false).then(() =>
-                sleep(100).then(() =>
+                sleep(20).then(() =>
                     setUpdateBrightness(true)
                 )
             );
@@ -47,10 +47,10 @@ export default function (props: any) {
             setUpdateBrightness(false);
         }
     }
- //background: linear-gradient(to right,#cb3e0d,#d02773);
+
     return <div
         className={`fixed top-0 left-0 z-50 w-full py-4 rounded-b-md drop-shadow-md shadow-cgray-700 ${globalPaddingXCss} 
-            bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-[#cb3e0d] to-[#d02773]`}>
+            dark:bg-cgray-700`}>
         <div className={"flex justify-between items-center"}>
             <h2 className={`!m-0 flex font-semibold text-white -mt-1`}>
                 <img className={'h-8 md:h-10 !m-0 !mr-1'} src={"/icon1.png"} />
@@ -94,8 +94,8 @@ export default function (props: any) {
                 onChangeEnd={bri => setBrightness(bri as any, true)}
                 classNames={{
                     base: "max-w-md",
-                    track: "border-s-gray-100",
-                    filler: "bg-gradient-to-r from-gray-100 to-gray-200"
+                    track: "border-s-cgray-0",
+                    filler: "bg-gradient-to-r from-cgray-0 to-cgray-0"
                 }}
                 renderThumb={(props) => (
                     <div
@@ -103,7 +103,7 @@ export default function (props: any) {
                         className="group p-1 top-1/2 bg-background border-small border-default-200 dark:border-default-400/50 shadow-medium rounded-full cursor-grab data-[dragging=true]:cursor-grabbing"
                     >
                             <span
-                                className="transition-transform bg-gradient-to-br shadow-small from-blue-300 to-blue-500 rounded-full w-3 h-3 block group-data-[dragging=true]:scale-80"/>
+                                className="transition-transform bg-cgray-400 shadow-small rounded-full w-3 h-3 block group-data-[dragging=true]:scale-80"/>
                     </div>
                 )}
             />

@@ -1,5 +1,5 @@
 import {Color, ColorPalette, Effect, WebsocketConnection} from "../types/types";
-import {LightInfo, LightState} from "../types/light";
+import {LightInfo, LightState, Segment} from "../types/light";
 
 export interface ColorPalettesStore {
     colorPalettes: ColorPalette[],
@@ -33,6 +33,7 @@ export interface LightsStore {
     fetchLightState: () => Promise<void>;
     setLightState: (state) => void;
     setBrightness: (brightness: number, updateState?: boolean) => Promise<void>;
+    setSegmentBrightness: (segment: Segment, brightness: number, updateState?: boolean) => Promise<void>;
     setOn: (enabled: boolean) => Promise<void>;
 }
 

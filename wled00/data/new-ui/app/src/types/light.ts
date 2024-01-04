@@ -1,3 +1,5 @@
+import {ColorPalette, Effect} from "./types";
+
 export interface Light {
     state: LightState
     info: LightInfo
@@ -61,6 +63,10 @@ export interface Segment {
     si: number
     m12: number
     n?: string // name of segment
+
+    // additional properties
+    activeEffect: Effect
+    activePalette: ColorPalette
 }
 
 export interface LightInfo {

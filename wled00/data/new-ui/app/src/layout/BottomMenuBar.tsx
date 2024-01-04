@@ -43,21 +43,23 @@ export default function (props: any) {
     const isActive = path => route === path;
 
     return <div
-        className="fixed bottom-0 left-0 z-50 w-full h-[80px] bg-white bg-slate-50 rounded-t-md dark:bg-cgray-700 dark:border-cgray-600">
+        className="fixed bottom-0 left-0 z-50 w-full h-[60px] bg-white bg-slate-50 rounded-t-md dark:bg-cgray-700 dark:border-cgray-600">
         <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-            {options.map(opt =>
+            {options.map((opt, i) =>
                 <div className={clsx(
                     'inline-flex flex-col items-center pb-4 pt-4',
-                    isActive(opt.link) ? "bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-[#cb3e0d] to-[#d02773]" : ""
+                    isActive(opt.link) ?
+                        `bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-[#cb3e0d] to-[#d02773] ${i === 0 ? 'rounded-l-md' : ''}  ${i === options.length-1 ? 'rounded-r-md' : ''}`
+                        : ""
                 )}>
                     <NavLink
                         to={opt.link}
                         key={opt.text}
                         className={"group no-underline"}>
                         {opt.icon(isActive(opt.link))}
-                        <p className={"!m-0 " + (isActive(opt.link) ? "dark:text-gray-200" : "text-gray-500 dark:text-gray-400")}>
-                            {opt.text}
-                        </p>
+                        {/*<p className={"!m-0 " + (isActive(opt.link) ? "dark:text-gray-200" : "text-gray-500 dark:text-gray-400")}>*/}
+                        {/*    {opt.text}*/}
+                        {/*</p>*/}
                     </NavLink>
                 </div>
             )}

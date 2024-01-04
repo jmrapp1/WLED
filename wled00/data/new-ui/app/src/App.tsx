@@ -22,13 +22,13 @@ function App() {
     }, []);
 
     return (
-        <div className="prose lg:prose-lg prose-slate dark:prose-invert dark:bg-cgray-500 min-h-screen pt-[130px]">
+        <div className="prose lg:prose-lg prose-slate dark:prose-invert dark:bg-cgray-800 min-h-screen pt-[130px]">
             <BrowserRouter>
                 <TopMenuBar />
                 <div className="pb-24">
                     <Routes>
                         <Route path="/" element={<Home/>}/>
-                        <Route path="/effects" element={<Effects/>}/>
+                        <Route path="/presets" element={<Effects/>}/>
                     </Routes>
                 </div>
                 <BottomMenuBar/>

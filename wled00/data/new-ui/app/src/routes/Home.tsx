@@ -1,9 +1,10 @@
 import {useBoundStore} from "../state/state";
 import ColorPaletteBox from "../components/ColorPaletteBox";
 import HorizontalGrid from "../components/HorizontalGrid";
-import {globalPaddingXCss, globalX} from "../layout/global";
+import {globalMarginXCss, globalPaddingXCss, globalX} from "../layout/global";
 import EffectBox from "../components/EffectBox";
 import clsx from "clsx";
+import SegmentBox from "../components/SegmentBox";
 
 export default function (props: any) {
 
@@ -15,12 +16,19 @@ export default function (props: any) {
     const selectedPalettes = segments.map(seg => seg.pal);
 
     return <div className="grid grid-cols-1 gap-y-2">
-        <div className={clsx("mt-4", globalPaddingXCss)}>
-            <h1 className={"!m-0"}>Home</h1>
-            <p className={"dark:text-cgray-0 !m-0"}>Select effects, choose and customize color palettes, and target specific segments all in one place!</p>
+        <div>
+            <p className={clsx(`dark:text-gray-300 !-mb-1 md:!mb-0`, globalPaddingXCss)}>SEGMENTS</p>
+            <div className={"grid grid-cols-1 gap-y-4 pt-4"}>
+                {
+                    segments.map((segment, i) => <SegmentBox
+                        segment={segment}
+                        className={`mx-${globalX}`}
+                    />)
+                }
+            </div>
         </div>
         <div>
-            <p className={clsx(`dark:text-gray-300 !mb-0`, globalPaddingXCss)}>PALETTES</p>
+            <p className={clsx(`dark:text-gray-300 !-mb-1 md:!mb-0`, globalPaddingXCss)}>PALETTES</p>
             <div>
                 <HorizontalGrid
                     rows={2}
@@ -36,7 +44,7 @@ export default function (props: any) {
             </div>
         </div>
         <div className={""}>
-            <p className={clsx(`dark:text-gray-300 !mb-0`, globalPaddingXCss)}>EFFECTS</p>
+            <p className={clsx(`dark:text-gray-300 !-mb-1 md:!mb-0`, globalPaddingXCss)}>EFFECTS</p>
             <div>
                 <HorizontalGrid
                     rows={3}

@@ -24,7 +24,7 @@ export default function (props: ColorBoxProps) {
             }} />
 
         <div className={clsx(
-            `relative bg-white dark:bg-cgray-300 px-2 py-4 md:py-8 w-full rounded-md`,
+            `relative bg-white dark:bg-cgray-500 px-2 py-4 md:py-8 w-full rounded-md`,
             props.activePalette ? "" : "border-1 dark:border-0 shadow-md dark:shadow-cgray-700"
         )}>
             <div className={`p-1 rounded-full border-2 border-gray-800 dark:border-white b w-10 h-10 m-auto`}
