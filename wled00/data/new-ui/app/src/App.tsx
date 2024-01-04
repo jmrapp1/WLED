@@ -22,7 +22,7 @@ function App() {
     }, []);
 
     return (
-        <div className="prose lg:prose-lg prose-slate dark:prose-invert dark:bg-cgray-800 min-h-screen pt-[130px]">
+        <div className="prose lg:prose-lg prose-slate dark:prose-invert dark:bg-cgray-800 min-h-screen pt-[110px]">
             <BrowserRouter>
                 <TopMenuBar />
                 <div className="pb-24">

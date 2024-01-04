@@ -20,6 +20,23 @@ const StyledThumb = styled.div`
 
 const Thumb = (props, state) => <StyledThumb {...props}></StyledThumb>;
 
+const StyledTrack = styled.div`
+  top: 0;
+  bottom: 0;
+  background: ${(props: any) => props.index === 1 ? props.backgroundInactive : props.backgroundActive};
+  cursor: ${(props: any) => props.index === 0 ? "grab" : ""};
+  border-top-right-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  width: 80px;
+`;
+
+const Track = (trackProps, state) => <StyledTrack
+    {...trackProps}
+    index={trackProps.state.index}
+    backgroundActive={trackProps.backgroundActive}
+    backgroundInactive={trackProps.backgroundInactive}
+/>;
+
 export interface VerticalSliderProps {
     backgroundActive: string
     backgroundInactive: string
@@ -32,30 +49,20 @@ export interface VerticalSliderProps {
 // Fix is documented here: https://github.com/zillow/react-slider/pull/311/files
 
 export default function (props: VerticalSliderProps) {
-    const StyledTrack = styled.div`
-      top: 0;
-      bottom: 0;
-      background: ${(props: any) => props.index === 1 ? props.backgroundInactive : props.backgroundActive};
-      cursor: ${(props: any) => props.index === 0 ? "grab" : ""};
-      border-top-right-radius: 6px !important;
-      border-bottom-right-radius: 6px !important;
-      width: 80px;
-    `;
-
-    const Track = (trackProps, state) => <StyledTrack
-        {...trackProps}
-        index={state.index}
-        backgroundActive={props.backgroundActive}
-        backgroundInactive={props.backgroundInactive}
-    />;
-
     return <StyledSlider
         invert
         value={props.value}
         min={0}
         max={255}
         orientation="vertical"
-        renderTrack={Track}
+        renderTrack={(trackProps, state) =>
+            <Track
+                {...trackProps}
+                state={state}
+                backgroundActive={props.backgroundActive}
+                backgroundInactive={props.backgroundInactive}
+            />
+        }
         renderThumb={Thumb}
         onChange={props.onChange}
         onAfterChange={props.onChangeEnd}
