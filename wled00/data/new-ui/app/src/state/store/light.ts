@@ -36,6 +36,14 @@ async function setSegmentBrightness(segment: Segment, brightness: number, update
         }}, state, updateState);
 }
 
+async function setSegmentSelected(segment: Segment, selected: boolean, state: AppState) {
+    await sendCommand({
+        seg: {
+            id: segment.id,
+            sel: selected
+        }}, state);
+}
+
 async function setOn(on: boolean, state: AppState) {
     return sendCommand({
         on
@@ -52,5 +60,6 @@ export const createLightsStore: StateCreator<AppState, [], [], LightsStore> =
         fetchLightState: async () => setState(await fetchLightState(get()), set, get()),
         setBrightness: async (brightness, updateState = true) => setBrightness(brightness, updateState, get()),
         setSegmentBrightness: async (segment, brightness, updateState = true) => setSegmentBrightness(segment, brightness, updateState, get()),
+        setSegmentSelected: async (segment, selected) => setSegmentSelected(segment, selected, get()),
         setOn: async (enabled) => setOn(enabled, get()),
     });

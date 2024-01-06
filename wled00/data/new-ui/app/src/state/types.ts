@@ -34,6 +34,7 @@ export interface LightsStore {
     setLightState: (state) => void;
     setBrightness: (brightness: number, updateState?: boolean) => Promise<void>;
     setSegmentBrightness: (segment: Segment, brightness: number, updateState?: boolean) => Promise<void>;
+    setSegmentSelected: (segment: Segment, selected: boolean) => Promise<void>;
     setOn: (enabled: boolean) => Promise<void>;
 }
 

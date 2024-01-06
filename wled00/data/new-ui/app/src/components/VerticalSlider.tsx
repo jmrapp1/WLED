@@ -7,7 +7,7 @@ const StyledSlider = styled(ReactSlider)`
 `;
 
 const StyledThumb = styled.div`
-  height: 8px;
+  height: 5px;
   width: 80px;
   text-align: center;
   background-color: #d7dbe0;
@@ -23,7 +23,7 @@ const Thumb = (props, state) => <StyledThumb {...props}></StyledThumb>;
 const StyledTrack = styled.div`
   top: 0;
   bottom: 0;
-  background: ${(props: any) => props.index === 1 ? props.backgroundInactive : props.backgroundActive};
+  background: ${(props: any) => props.index === 1 ? props.backgroundinactive : props.backgroundactive};
   cursor: ${(props: any) => props.index === 0 ? "grab" : ""};
   border-top-right-radius: 6px !important;
   border-bottom-right-radius: 6px !important;
@@ -33,8 +33,8 @@ const StyledTrack = styled.div`
 const Track = (trackProps, state) => <StyledTrack
     {...trackProps}
     index={trackProps.state.index}
-    backgroundActive={trackProps.backgroundActive}
-    backgroundInactive={trackProps.backgroundInactive}
+    backgroundactive={trackProps.backgroundactive}
+    backgroundinactive={trackProps.backgroundinactive}
 />;
 
 export interface VerticalSliderProps {
@@ -59,8 +59,8 @@ export default function (props: VerticalSliderProps) {
             <Track
                 {...trackProps}
                 state={state}
-                backgroundActive={props.backgroundActive}
-                backgroundInactive={props.backgroundInactive}
+                backgroundactive={props.backgroundActive}
+                backgroundinactive={props.backgroundInactive}
             />
         }
         renderThumb={Thumb}

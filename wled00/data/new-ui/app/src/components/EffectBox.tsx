@@ -1,4 +1,4 @@
-import {Effect} from "../types/types";
+import {ColorPalette, Effect} from "../types/types";
 import {CSSProperties} from "react/index";
 import {useBoundStore} from "../state/state";
 import {colorPaletteToGradient} from "../utils/colorUtils";
@@ -6,6 +6,7 @@ import {colorPaletteToGradient} from "../utils/colorUtils";
 export interface EffectBoxProps {
     effect: Effect;
     activeEffect: boolean;
+    activePalette?: ColorPalette;
     className?: string;
 }
 
@@ -22,7 +23,7 @@ export default function (props: EffectBoxProps) {
         {
             props.activeEffect &&
             <div className="absolute -inset-1 rounded-lg opacity-45 blur" style={{
-                background: "linear-gradient(to right,#cb3e0d,#d02773)"
+                background: props.activePalette ? colorPaletteToGradient(props.activePalette) : "linear-gradient(to right,#d7dbe0,#9AA5B1)"
             }}/>
         }
 

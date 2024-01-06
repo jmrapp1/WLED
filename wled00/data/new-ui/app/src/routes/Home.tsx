@@ -12,7 +12,6 @@ export default function (props: any) {
 
     // Get segments and get the active effects and palette
     const segments = store.lightState?.seg || [];
-    const selectedEffects = segments.map(seg => seg.fx);
     const selectedPalettes = segments.map(seg => seg.pal);
 
     return <div className="grid grid-cols-1 gap-y-2">
@@ -52,7 +51,8 @@ export default function (props: any) {
                     render={(effect, i, len) =>
                         <EffectBox
                             effect={effect}
-                            activeEffect={selectedEffects.indexOf(effect.id) >= 0}
+                            activeEffect={segments.find(seg => seg.activeEffect?.id === effect.id) !== undefined}
+                            activePalette={segments.find(seg => seg.activeEffect?.id === effect.id)?.activePalette}
                             className={i === 0 ? `ml-${globalX}` : ''}
                         />
                     }
